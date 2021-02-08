@@ -1,0 +1,59 @@
+.pageContainer {
+  background-color: #33393f;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer {
+  border-radius: 10px;
+  height: 400px;
+  width: 40%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  height: 40%;
+  width: 40%;
+  background-color: #0181e3;
+  border-radius: 10px;
+  border: 5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appName {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 8px;
+  padding: 10px 0 10px 0;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0181e3;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 50%;
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  width: 80%;
+}
