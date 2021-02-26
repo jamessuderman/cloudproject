@@ -8,15 +8,13 @@ package com.gcu.cloudproject.controllers;
 
 import com.gcu.cloudproject.models.InventoryItem;
 import com.gcu.cloudproject.models.Product;
+import com.gcu.cloudproject.models.User;
 import com.gcu.cloudproject.services.InventoryItemService;
 import com.gcu.cloudproject.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @SessionAttributes("name")
@@ -36,8 +34,8 @@ public class InventoryController {
         return addMav;
     }
 
-    @RequestMapping(value="/delete", method = RequestMethod.POST)
-    public ModelAndView delete(@RequestParam("itemId") int itemId) {
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable("id") int itemId) {
         InventoryItem item = inventoryItemService.findById(itemId);
         inventoryItemService.delete(item);
 
@@ -104,6 +102,14 @@ public class InventoryController {
         productService.save(product);
         inventoryItemService.save(item);
 
+        ModelAndView appMav = new ModelAndView();
+        appMav.addObject("items", inventoryItemService.getInventoryItems());
+        appMav.setViewName("app");
+        return appMav;
+    }
+
+    @RequestMapping(value="/app", method = RequestMethod.GET)
+    public ModelAndView showApp(ModelMap model){
         ModelAndView appMav = new ModelAndView();
         appMav.addObject("items", inventoryItemService.getInventoryItems());
         appMav.setViewName("app");

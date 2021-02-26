@@ -32,7 +32,10 @@
                 <label for="description">Amount</label>
                 <input type="text" class="form-control" id="amount" name="amount" value="${item.getAmount()}">
             </div>
-            <button type="submit" class="btn btn-dark">Submit</button>
+            <div class="editButtonContainer">
+                <a class="btn btn-danger" href="/delete/${item.getInventoryItemId()}">Delete</a>
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
         </form>
     </div>
 </div>

@@ -25,7 +25,6 @@
                     <th scope="col">NAME</th>
                     <th scope="col">DESCRIPTION</th>
                     <th scope="col">AMOUNT</th>
-                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,14 +33,6 @@
                         <td>${item.getProduct().getName()}</td>
                         <td>${item.getProduct().getDescription()}</td>
                         <td>${item.getAmount()}</td>
-                        <td>
-                            <form:form class="deleteForm" method="POST" action="/delete" style="margin: 0;">
-                                <input type="hidden" id="itemId" name="itemId" value="${item.getInventoryItemId()}">
-                                <button type="submit">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </form:form>
-                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
