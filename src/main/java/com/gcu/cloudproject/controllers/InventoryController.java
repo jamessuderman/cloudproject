@@ -11,14 +11,20 @@ import com.gcu.cloudproject.models.Product;
 import com.gcu.cloudproject.models.User;
 import com.gcu.cloudproject.services.InventoryItemService;
 import com.gcu.cloudproject.services.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 @Controller
 @SessionAttributes("name")
 public class InventoryController {
+    Logger inventoryLogger = LoggerFactory.getLogger(InventoryController.class);
+
     private final InventoryItemService inventoryItemService;
     private final ProductService productService;
 
@@ -29,6 +35,7 @@ public class InventoryController {
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public ModelAndView showAddPage(ModelMap model){
+        inventoryLogger.info("InventoryController --- showAddPage --- " + new Date().toString());
         ModelAndView addMav = new ModelAndView();
         addMav.setViewName("add");
         return addMav;
@@ -36,6 +43,7 @@ public class InventoryController {
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id") int itemId) {
+        inventoryLogger.info("InventoryController --- delete --- " + new Date().toString());
         InventoryItem item = inventoryItemService.findById(itemId);
         inventoryItemService.delete(item);
 
@@ -47,6 +55,7 @@ public class InventoryController {
 
     @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
     public ModelAndView showEditPage(ModelMap model, @PathVariable int id){
+        inventoryLogger.info("InventoryController --- showEditPage --- " + new Date().toString());
         ModelAndView editMav = new ModelAndView();
         InventoryItem item = inventoryItemService.findById(id);
         editMav.addObject("item", item);
@@ -72,6 +81,8 @@ public class InventoryController {
         item.setAmount(itemAmount);
 
         inventoryItemService.save(item);
+
+        inventoryLogger.info("InventoryController --- save --- " + new Date().toString());
 
         ModelAndView appMav = new ModelAndView();
         appMav.addObject("items", inventoryItemService.getInventoryItems());
@@ -102,6 +113,8 @@ public class InventoryController {
         productService.save(product);
         inventoryItemService.save(item);
 
+        inventoryLogger.info("InventoryController --- create --- " + new Date().toString());
+
         ModelAndView appMav = new ModelAndView();
         appMav.addObject("items", inventoryItemService.getInventoryItems());
         appMav.setViewName("app");
@@ -110,6 +123,7 @@ public class InventoryController {
 
     @RequestMapping(value="/app", method = RequestMethod.GET)
     public ModelAndView showApp(ModelMap model){
+        inventoryLogger.info("InventoryController --- showApp --- " + new Date().toString());
         ModelAndView appMav = new ModelAndView();
         appMav.addObject("items", inventoryItemService.getInventoryItems());
         appMav.setViewName("app");
