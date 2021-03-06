@@ -34,16 +34,24 @@ public class LoginController {
         this.inventoryItemService = inventoryItemService;
     }
 
+    /**
+     * @return the model and view for the login page
+     */
     @RequestMapping(value="/", method = RequestMethod.GET)
-    public ModelAndView showLoginPage(ModelMap model){
+    public ModelAndView showLoginPage(){
         loginLogger.info("LoginController --- showLoginPage --- " + new Date().toString());
         ModelAndView loginMav = new ModelAndView();
         loginMav.setViewName("login");
         return loginMav;
     }
 
+    /**
+     * Will validate the user based upon username and password
+     * @param user is the user from login form
+     * @return to the main app page
+     */
     @RequestMapping(value="/app", method = RequestMethod.POST)
-    public ModelAndView navigateToApp(ModelMap model, @ModelAttribute User user){
+    public ModelAndView navigateToApp(@ModelAttribute User user){
         ModelAndView appMav = new ModelAndView();
 
         if(loginService.validate(user.getUsername(), user.getPassword())) {

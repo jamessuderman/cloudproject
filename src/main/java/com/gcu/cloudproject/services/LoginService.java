@@ -24,6 +24,11 @@ public class LoginService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * @param username is the username from the form
+     * @param password is the password from the form
+     * @return a boolean to indicate if validated
+     */
     public boolean validate(String username, String password) {
         loginServiceLogger.info("LoginService --- validate --- " + new Date().toString());
         User user = userRepository.findByUsername(username);

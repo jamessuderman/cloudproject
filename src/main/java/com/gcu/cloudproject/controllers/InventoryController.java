@@ -32,14 +32,22 @@ public class InventoryController {
         this.productService = productService;
     }
 
+
+    /**
+     * @return the model and view for the add page
+     */
     @RequestMapping(value="/add", method = RequestMethod.GET)
-    public ModelAndView showAddPage(ModelMap model){
+    public ModelAndView showAddPage(){
         inventoryLogger.info("InventoryController --- showAddPage --- " + new Date().toString());
         ModelAndView addMav = new ModelAndView();
         addMav.setViewName("add");
         return addMav;
     }
 
+    /**
+     * @param itemId is the id of the inventory item from the URL
+     * @return the main app page
+     */
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id") int itemId) {
         inventoryLogger.info("InventoryController --- delete --- " + new Date().toString());
@@ -52,8 +60,12 @@ public class InventoryController {
         return appMav;
     }
 
+    /**
+     * @param id is the id of the inventory item from URL
+     * @return the model and view for the edit page
+     */
     @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView showEditPage(ModelMap model, @PathVariable int id){
+    public ModelAndView showEditPage(@PathVariable int id){
         inventoryLogger.info("InventoryController --- showEditPage --- " + new Date().toString());
         ModelAndView editMav = new ModelAndView();
         InventoryItem item = inventoryItemService.findById(id);
@@ -62,6 +74,13 @@ public class InventoryController {
         return editMav;
     }
 
+    /**
+     * @param itemId is the id for the inventory item
+     * @param name is the name of the inventory item
+     * @param description is the description of the inventory item
+     * @param amount is the number of units in inventory
+     * @return to the main app page
+     */
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public ModelAndView save(@RequestParam(name = "itemId") int itemId,
                              @RequestParam(name = "name") String name,
@@ -89,6 +108,12 @@ public class InventoryController {
         return appMav;
     }
 
+    /**
+     * @param name is the name of the inventory item
+     * @param description is the description of the inventory item
+     * @param amount is the number of units in inventory
+     * @return to the main app page
+     */
     @RequestMapping(value="/create", method = RequestMethod.POST)
     public ModelAndView create(@RequestParam(name = "name") String name,
                                @RequestParam(name = "description") String description,
@@ -120,8 +145,11 @@ public class InventoryController {
         return appMav;
     }
 
+    /**
+     * @return the model and view for the main app page
+     */
     @RequestMapping(value="/app", method = RequestMethod.GET)
-    public ModelAndView showApp(ModelMap model){
+    public ModelAndView showApp(){
         inventoryLogger.info("InventoryController --- showApp --- " + new Date().toString());
         ModelAndView appMav = new ModelAndView();
         appMav.addObject("items", inventoryItemService.getInventoryItems());

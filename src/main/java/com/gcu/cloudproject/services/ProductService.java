@@ -24,6 +24,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * @param product product to save
+     * @return the product as proof of save
+     */
     public Product save(Product product) {
         productServiceLogger.info("ProductService --- save --- " + new Date().toString());
         return productRepository.save(product);
