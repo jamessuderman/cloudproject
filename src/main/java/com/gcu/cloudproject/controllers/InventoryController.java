@@ -8,7 +8,6 @@ package com.gcu.cloudproject.controllers;
 
 import com.gcu.cloudproject.models.InventoryItem;
 import com.gcu.cloudproject.models.Product;
-import com.gcu.cloudproject.models.User;
 import com.gcu.cloudproject.services.InventoryItemService;
 import com.gcu.cloudproject.services.ProductService;
 import org.slf4j.Logger;
